@@ -15,9 +15,9 @@ def plotDecisionBoundary(X, Y, scoreFn, values, title = ""):
     h = max((x_max-x_min)/200., (y_max-y_min)/200.)
     xx, yy = meshgrid(arange(x_min, x_max, h),
                       arange(y_min, y_max, h))
-    zz = array([scoreFn(x) for x in c_[xx.ravel(), yy.ravel()]])
+    X_tmp = array([[x1, x2] for x1, x2 in zip(ravel(xx), ravel(yy))])
+    zz = array([scoreFn(X_tmp)])
     zz = zz.reshape(xx.shape)
-    print xx, yy, zz
     pl.figure()
     CS = pl.contour(xx, yy, zz, values, colors = 'green', linestyles = 'solid', linewidths = 2)
     pl.clabel(CS, fontsize=9, inline=1)
